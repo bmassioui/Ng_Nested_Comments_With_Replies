@@ -12,12 +12,19 @@ export class CommentComponent implements OnInit {
     @Input() comment!: CommentInterface;
     @Input() replies!: CommentInterface[];
     @Input() currentUserId!: string;
+    @Input() activeComment!: ActiveCommentInterface | null;
+    @Input() parentId: string | null = null;
 
     @Output() setActiveComment = new EventEmitter<ActiveCommentInterface | null>();
+    @Output() addComment = new EventEmitter<{
+        text: string;
+        parentId: string | null;
+    }>();
 
     public canReply: boolean = false;
     public canEdit: boolean = false;
     public canDelete: boolean = false;
+    public replyId: string | null = null;
 
     public activeCommentType = ActiveCommentTypeEnum;
 
@@ -27,5 +34,13 @@ export class CommentComponent implements OnInit {
         this.canReply = Boolean(this.currentUserId); // If null or undefined, it will return false
         this.canEdit = this.currentUserId === this.comment.userId && !timePassed; // The comment is only editable(can be altered) in the 1st 5Mins by its author
         this.canDelete = this.currentUserId === this.comment.userId && this.replies.length === 0 && !timePassed; // The comment is only editable(Can be deleted) in the 1st 5Mins by its author
+        this.replyId = this.parentId ? this.parentId : this.comment.id;
+    }
+
+    isReplying(): boolean {
+        if (!this.activeComment) return false;
+
+        return this.activeComment.id === this.comment.id &&
+            this.activeComment.type === this.activeCommentType.replying;
     }
 }

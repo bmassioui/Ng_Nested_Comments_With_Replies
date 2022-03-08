@@ -4,7 +4,10 @@
     <commentForm submitLabel="Write" (handleSubmit)="addComment({text: $event, parentId: null})"></commentForm>
     <div class="comments-container">
         <comment *ngFor="let comment of comments" [comment]="comment" [currentUserId]="currentUserId"
-            [replies]="getReplies(comment.id)" (setActiveComment)="setActiveComment($event)">
+            [replies]="getReplies(comment.id)"
+            [activeComment]="activeComment"
+            (setActiveComment)="setActiveComment($event)"
+            (addComment)="addComment($event)">
         </comment>
     </div>
 </div>

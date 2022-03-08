@@ -19,6 +19,7 @@
                 (click)="setActiveComment.emit({id: comment.id, type: activeCommentType.editing})">Edit</div>
             <div *ngIf="canDelete" class="comment-action">Delete</div>
         </div>
+        <commentForm *ngIf="isReplying()" submitLabel="Reply" (handleSubmit)="addComment.emit({text:$event, parentId: replyId})"></commentForm>
         COMMENT FORM REPLYING REPLIES
     </div>
 </div>
