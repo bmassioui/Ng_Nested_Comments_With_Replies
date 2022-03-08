@@ -1,0 +1,7 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <textarea class="comment-form-textarea" formControlName="title" placeholder="..."></textarea>
+    <button class="comment-form-button" type="submit" [disabled]="form.invalid">
+        {{submitLabel}}
+    </button>
+    <button *ngIf="hasCancelButton" type="button" class="comment-form-button comment-form-cancel-button">Cancel</button>
+</form>
