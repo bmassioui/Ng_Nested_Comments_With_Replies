@@ -17,4 +17,14 @@ export class CommentsComponent implements OnInit {
     ngOnInit(): void {
         this.commentsService.getComments().subscribe((comments) => this.comments = comments);
     }
+
+    /**
+     * Add Comment
+     * @param param
+     */
+    addComment({text, parentId}:{text:string, parentId: null|string}):void{
+        this.commentsService.createComment(text, parentId).subscribe((createdComment) => {
+            this.comments = [...this.comments, createdComment];
+        });
+    }
 }

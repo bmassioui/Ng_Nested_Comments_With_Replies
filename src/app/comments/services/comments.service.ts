@@ -16,4 +16,15 @@ export class CommentsService {
     getComments(): Observable<CommentInterface[]> {
         return this.httpClient.get<CommentInterface[]>(environment.commentsAPI);
     }
+
+    createComment(text:string, parentId: null|string):Observable<CommentInterface>{
+        return this.httpClient.post<CommentInterface>(environment.commentsAPI, {
+            body: text,
+            parentId,
+            // Should not be set here (this part should be done by backend)
+            createdAt: new Date().toISOString(),
+            userId: '1',
+            username: 'John',
+        });
+    }
 }
