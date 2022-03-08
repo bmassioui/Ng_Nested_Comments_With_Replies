@@ -48,6 +48,16 @@ export class CommentsComponent implements OnInit {
     }
 
     /**
+     * Delete Comment
+     * @param commentId 
+     */
+    deleteComment(commentId: string) : void{
+        this.commentsService.deleteComment(commentId).subscribe(() =>{
+            this.comments = this.comments.filter((comment) => comment.id !== commentId);
+        });
+    }
+
+    /**
      * Get Comment's Replies
      * @param commentId 
      * @returns 

@@ -45,4 +45,13 @@ export class CommentsService {
             body: text
         });
     }
+
+    /**
+     * Delete Comment
+     * @param id 
+     * @returns 
+     */
+    deleteComment(id: string) : Observable<{}>{
+        return this.httpClient.delete(environment.commentsAPI + `/${id}`);
+    }
 }
