@@ -27,6 +27,7 @@ export class CommentsComponent implements OnInit {
     addComment({ text, parentId }: { text: string, parentId: null | string }): void {
         this.commentsService.createComment(text, parentId).subscribe((createdComment) => {
             this.comments = [...this.comments, createdComment];
+            this.activeComment = null;
         });
     }
 
