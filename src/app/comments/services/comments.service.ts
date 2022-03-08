@@ -17,7 +17,13 @@ export class CommentsService {
         return this.httpClient.get<CommentInterface[]>(environment.commentsAPI);
     }
 
-    createComment(text:string, parentId: null|string):Observable<CommentInterface>{
+    /**
+     * Create Comment
+     * @param text 
+     * @param parentId 
+     * @returns 
+     */
+    createComment(text: string, parentId: null | string): Observable<CommentInterface> {
         return this.httpClient.post<CommentInterface>(environment.commentsAPI, {
             body: text,
             parentId,
@@ -25,6 +31,18 @@ export class CommentsService {
             createdAt: new Date().toISOString(),
             userId: '1',
             username: 'John',
+        });
+    }
+
+    /**
+     * Update Comment
+     * @param id 
+     * @param text 
+     * @returns 
+     */
+    updateComment(id: string, text: string): Observable<CommentInterface> {
+        return this.httpClient.patch<CommentInterface>(environment.commentsAPI+`/${id}`, {
+            body: text
         });
     }
 }

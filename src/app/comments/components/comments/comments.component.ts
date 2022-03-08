@@ -32,6 +32,22 @@ export class CommentsComponent implements OnInit {
     }
 
     /**
+     * Update Comment
+     * @param 
+     */
+    updateComment({ text, commentId }: { text: string, commentId: string }) {
+        this.commentsService.updateComment(commentId, text)
+            .subscribe((updatedComment) => {
+                this.comments = this.comments.map((comment) =>{
+                    if(comment.id === commentId) return updatedComment;
+                    return comment;
+                })
+
+                this.activeComment = null;
+            });
+    }
+
+    /**
      * Get Comment's Replies
      * @param commentId 
      * @returns 

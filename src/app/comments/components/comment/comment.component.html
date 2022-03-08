@@ -8,9 +8,14 @@
                 {{comment.username}}
             </div>
         </div>
-        <div class="comment-text">
+        <div class="comment-text" *ngIf="!isEditing()">
             {{comment.body}}
         </div>
+        <commentForm *ngIf="isEditing()" 
+        submitLabel="Update" 
+        [hasCancelButton]="true"
+        [initialText]="comment.body"
+        (handleSubmit)="updateComment.emit({text: $event, commentId: comment.id})"></commentForm>
         <div class="comment-actions">
             <div *ngIf="canReply" class="comment-action"
                 (click)="setActiveComment.emit({id: comment.id, type: activeCommentType.replying})">Reply</div>
@@ -23,7 +28,7 @@
         <div class="replies" *ngIf="replies.length > 0">
             <comment *ngFor="let reply of replies" [comment]="reply" (setActiveComment)="setActiveComment.emit($event)"
                 [activeComment]="activeComment" (addComment)="addComment.emit($event)" [parentId]="comment.id"
-                [replies]="[]" [currentUserId]="currentUserId">
+                [replies]="[]" [currentUserId]="currentUserId" (updateComment)="updateComment.emit($event)">
             </comment>
         </div>
     </div>
