@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { ActiveCommentInterface } from "../../types/activeComment.interface";
+import { ActiveCommentTypeEnum } from "../../types/activeCommentType.enum";
 import { CommentInterface } from "../../types/comment.interface";
 
 @Component({
@@ -11,9 +13,13 @@ export class CommentComponent implements OnInit {
     @Input() replies!: CommentInterface[];
     @Input() currentUserId!: string;
 
+    @Output() setActiveComment = new EventEmitter<ActiveCommentInterface | null>();
+
     public canReply: boolean = false;
     public canEdit: boolean = false;
     public canDelete: boolean = false;
+
+    public activeCommentType = ActiveCommentTypeEnum;
 
     ngOnInit(): void {
         const fiveMinutes = 300000; // 5Mins
