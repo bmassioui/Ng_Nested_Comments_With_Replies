@@ -10,6 +10,7 @@ import { CommentInterface } from "../../types/comment.interface";
 export class CommentsComponent implements OnInit {
     @Input() currentUserId!: string; // 100% sure that will be provided
     comments: CommentInterface[] = [];
+    activeComment: CommentInterface | null = null;
 
     constructor(private commentsService: CommentsService) {
     }
