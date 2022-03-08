@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { CommentInterface } from "../comments/components/types/comment.interface";
+import { CommentInterface } from "../../types/comment.interface";
 
 @Component({
     selector: 'comment',
