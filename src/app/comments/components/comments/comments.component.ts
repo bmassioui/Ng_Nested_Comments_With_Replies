@@ -35,7 +35,7 @@ export class CommentsComponent implements OnInit {
      */
     getReplies(commentId: string): CommentInterface[] {
         return this.comments
-            .filter(comment => comment.id == commentId)
+            .filter(comment => comment.parentId == commentId)
             .sort((a, b) =>
                 new Date(a.createdAt).getMilliseconds() -
                 new Date(b.createdAt).getMilliseconds()

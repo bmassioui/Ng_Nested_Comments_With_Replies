@@ -71,6 +71,14 @@
       "userId": "1",
       "username": "John",
       "id": "wc1zIo1"
+    },
+    {
+      "body": "Hi Bob",
+      "parentId": null,
+      "createdAt": "2022-03-08T13:27:16.193Z",
+      "userId": "1",
+      "username": "John",
+      "id": "SOfw4wl"
     }
   ]
 }
