@@ -22,9 +22,23 @@ export class CommentsComponent implements OnInit {
      * Add Comment
      * @param param
      */
-    addComment({text, parentId}:{text:string, parentId: null|string}):void{
+    addComment({ text, parentId }: { text: string, parentId: null | string }): void {
         this.commentsService.createComment(text, parentId).subscribe((createdComment) => {
             this.comments = [...this.comments, createdComment];
         });
+    }
+
+    /**
+     * Get Comment's Replies
+     * @param commentId 
+     * @returns 
+     */
+    getReplies(commentId: string): CommentInterface[] {
+        return this.comments
+            .filter(comment => comment.id == commentId)
+            .sort((a, b) =>
+                new Date(a.createdAt).getMilliseconds() -
+                new Date(b.createdAt).getMilliseconds()
+            );
     }
 }
