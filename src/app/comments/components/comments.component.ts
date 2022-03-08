@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { CommentsService } from "./services/comments.service";
+import { CommentInterface } from "./types/comment.interface";
 
 @Component({
     selector: 'comments',
@@ -8,11 +9,12 @@ import { CommentsService } from "./services/comments.service";
 
 export class CommentsComponent implements OnInit {
     @Input() currentUserId!: string; // 100% sure that will be provided
-    
-    constructor(private commentsService : CommentsService) {
+    comments: CommentInterface[] = [];
+
+    constructor(private commentsService: CommentsService) {
     }
 
     ngOnInit(): void {
-        this.commentsService.getComments().subscribe((comments) => console.log(comments));
+        this.commentsService.getComments().subscribe((comments) => this.comments = comments);
     }
 }
