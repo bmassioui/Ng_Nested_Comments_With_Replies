@@ -15,7 +15,8 @@
         submitLabel="Update" 
         [hasCancelButton]="true"
         [initialText]="comment.body"
-        (handleSubmit)="updateComment.emit({text: $event, commentId: comment.id})"></commentForm>
+        (handleSubmit)="updateComment.emit({text: $event, commentId: comment.id})"
+        (handleCancel)="setActiveComment.emit(null)"></commentForm>
         <div class="comment-actions">
             <div *ngIf="canReply" class="comment-action"
                 (click)="setActiveComment.emit({id: comment.id, type: activeCommentType.replying})">Reply</div>
